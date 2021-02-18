@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Home = () => {  
+const Login = () => {  
+
   return ( 
     <React.Fragment>
-      <h1>Home page</h1>
+      <h1>Login Page</h1>
     </React.Fragment>
     
    );
 }
  
-export default Home;
+export default Login;
