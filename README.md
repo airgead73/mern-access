@@ -1,4 +1,4 @@
 # mern-starter
-Full stack: React, MongoDB, Express Node
-## branch v7
-hooks tutorial
+Full stack: React, MongoDB, Express Node. Sandbox for testing authentication strategies.
+## branch a1
+dummy authentication
