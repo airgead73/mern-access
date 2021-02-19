@@ -85,15 +85,16 @@ exports.create = asyncHandler(async function(req, res, next) {
  */
 
 exports.read = asyncHandler(async function(req, res, next) {
-  const users = await User.find();
+  
+  const { success, count, data } = res.results;
 
   return res
     .status(200)
     .json({
-      success: true,
+      success,
       message: 'Users found',
-      count: users.length,
-      results: users
+      count,
+      results: data
     });
 });
 

@@ -14,10 +14,13 @@ const {
   delete_all
 } = require('../actions/actions.users');
 
+// middleware
+const handleQuery = require('../middleware/handleQuery')
+
 // router
 usersRouter
   .route('/')
-  .get(read)
+  .get(handleQuery(User), read)
   .post(create)
   .delete(delete_all);
 
