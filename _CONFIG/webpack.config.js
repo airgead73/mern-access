@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack  = require('webpack');
+const { PORT_SERVER, PORT_CLIENT } = require('./constants');
 
 module.exports = {
 
@@ -27,10 +28,10 @@ module.exports = {
     publicPath: '/'
   },
   devServer: {
-    port: 8000,
+    port: PORT_CLIENT,
     historyApiFallback: true,
     proxy: {
-      '/api': 'http://localhost:4000'
+      '/api': `http://localhost:${PORT_SERVER}`
     }
   },
   plugins: [
