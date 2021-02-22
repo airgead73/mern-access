@@ -3,8 +3,8 @@ import React from 'react';
 const Header = (props) => {
   return ( 
     <header>
-      <h1>Header</h1>
-      { props.children }
+      <h1>project manager</h1>
+      <p>username</p>
     </header>
    );
 }

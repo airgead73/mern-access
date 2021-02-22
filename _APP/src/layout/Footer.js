@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Footer = (props) => {
+const Footer = () => {
   return ( 
     <footer>
-      <h1>Footer</h1>
-      { props.children }
+      <p><small>&copy; 2021</small></p>
     </footer>
    );
 }
