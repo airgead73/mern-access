@@ -1,10 +1,29 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { AuthContext, AuthProvider } from './contexts/authentication';
 import Layout from './layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MainDashboard from './pages/MainDashboard';
 import NotFound from './pages/NotFound';
+
+const PrivateRoute = ({ children, ...rest }) => {
+
+  const auth = React.useContext(AuthContext);
+
+  return (
+    <Route
+      {...rest}
+      render={() => 
+        auth.isAuthenticated() ? { children } : ( <Redirect to="/"/>)
+      }
+    >
+    </Route>
+  )
+
+
+
+}
 
 const AppRoutes = () => {
   return (
@@ -12,9 +31,9 @@ const AppRoutes = () => {
       <Route exact path='/'>
         <Home/>
       </Route>
-      <Route path='/dashboard'>
+      <PrivateRoute path='/dashboard'>
         <MainDashboard/>
-      </Route> 
+      </PrivateRoute> 
       <Route path='/login'>
         <Login/>
       </Route>
@@ -29,9 +48,11 @@ function App() {
 
   return (
 
-    <Layout>
-      <AppRoutes/>
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <AppRoutes/>
+      </Layout>
+    </AuthProvider>
 
   )
 }
