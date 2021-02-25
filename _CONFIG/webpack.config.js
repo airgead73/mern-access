@@ -28,10 +28,10 @@ module.exports = {
     publicPath: '/'
   },
   devServer: {
-    port: PORT_CLIENT,
+    port: 6001,
     historyApiFallback: true,
     proxy: {
-      '/api': `http://localhost:${PORT}`
+      '/api': `http://localhost:6000`
     }
   },
   plugins: [

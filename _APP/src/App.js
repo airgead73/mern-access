@@ -6,24 +6,23 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import MainDashboard from './pages/MainDashboard';
 import NotFound from './pages/NotFound';
+import Projects from './pages/Projects';
 
 const PrivateRoute = ({ children, ...rest }) => {
-
   const auth = React.useContext(AuthContext);
-
   return (
     <Route
       {...rest}
-      render={() => 
-        auth.isAuthenticated() ? { children } : ( <Redirect to="/"/>)
+      render={() =>
+        auth.isAuthenticated() ? (
+         <React.Fragment>{children}</React.Fragment>
+        ) : (
+          <Redirect to="/" />
+        )
       }
-    >
-    </Route>
-  )
-
-
-
-}
+    ></Route>
+  );
+};
 
 const AppRoutes = () => {
   return (
@@ -33,7 +32,10 @@ const AppRoutes = () => {
       </Route>
       <PrivateRoute path='/dashboard'>
         <MainDashboard/>
-      </PrivateRoute> 
+      </PrivateRoute>
+      <PrivateRoute path='/projects'>
+        <Projects/>
+      </PrivateRoute>        
       <Route path='/login'>
         <Login/>
       </Route>

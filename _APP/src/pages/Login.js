@@ -1,20 +1,43 @@
 import React from 'react';
+import { AuthContext } from '../contexts/authentication';
 
 const Login = () => {  
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const authContext = React.useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('email: ', email);
-    console.log('password: ', password);
-    setEmail('');
-    setPassword('')
+    const credentials = {
+      email,
+      password
+    };
+
+    fetch('api/authenticate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(credentials)
+    })
+    .then((response) => {
+      if(!response.ok) {
+        throw Error('Could not fetch data for that resource.')
+      } else {
+        return response.json()
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      authContext.setAuthState(data);
+    })
+    .catch((err) => {
+      console.warn(err)
+    });
+
   }
 
   return ( 
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <fieldset>
         <legend>log in to application</legend>
         <label htmlFor="email">email</label>

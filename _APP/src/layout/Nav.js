@@ -16,9 +16,15 @@ const Nav = (props) => {
           <Link to="/login">login</Link>
         </li>
         {auth.isAuthenticated() && (
+          <React.Fragment>
+
           <li>
             <Link to="/dashboard">dashboard</Link>
           </li>
+          <li>
+            <Link to="/projects">projects</Link>
+          </li>          
+          </React.Fragment>
         )}
       </ul>
     </nav>
