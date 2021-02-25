@@ -53,3 +53,17 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
   }
 
 });
+
+/**
+ * @route   GET /api/authenticate/logout
+ * @desc    logout user 
+ * @access  private
+ */
+
+exports.logout = asyncHandler(async function(req, res, next) {
+
+  return res
+    .status(200)
+    .cookie('')
+
+});

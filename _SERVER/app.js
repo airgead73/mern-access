@@ -2,7 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
+const session = require('express-session');
 const policies = require('../_CONFIG/csp');
+const { SESSION_SECRET, SESSION_AGE } = require('../_CONFIG/constants');
 
 /**
  * INTIALIZE APP
@@ -27,6 +29,22 @@ app.use(helmet.contentSecurityPolicy(policies));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, './../_PUBLIC')));
+app.use(session({
+  secret: SESSION_SECRET,
+  saveUninitialized: true,
+  resave: false,
+  cookie: {
+    httpOnly: true,
+    maxAge: parseInt(SESSION_AGE)
+  }
+}));
+
+app.use((req, res, next) => {
+
+  console.log(req.session);
+  next()
+
+});
 
 /**
  * DEV MIDDLEWARE
