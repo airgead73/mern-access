@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, './../_PUBLIC')));
 app.use(session({
   secret: SESSION_SECRET,
   saveUninitialized: true,
-  resave: false,
+  resave: true,
   cookie: {
     httpOnly: true,
     maxAge: parseInt(SESSION_AGE)
