@@ -1,7 +1,7 @@
 const asyncHandler = require('../middleware/handleAsync');
 const User = require('../models/User');
 const jwtDecode = require('jwt-decode');
-const { hashPassword, createToken, verifyPassword } = require('../util/authentication');
+const { createToken, verifyPassword } = require('../util/authentication');
 
 /**
  * @route   POST /api/authenticate
