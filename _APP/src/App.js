@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import MainDashboard from './pages/MainDashboard';
 import NotFound from './pages/NotFound';
 import Projects from './pages/Projects';
+import Signup from './pages/Signup';
 
 const PrivateRoute = ({ children, ...rest }) => {
   const auth = React.useContext(AuthContext);
@@ -38,6 +39,9 @@ const AppRoutes = () => {
       </PrivateRoute>        
       <Route path='/login'>
         <Login/>
+      </Route>
+      <Route path='/signup'>
+        <Signup/>
       </Route>
       <Route path='*'>
         <NotFound/>

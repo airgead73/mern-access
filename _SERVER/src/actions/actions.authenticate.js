@@ -22,7 +22,7 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
         success: false,
         message: 'Wrong email or password.'
       });
-  }
+  }  
 
   const passwordValid = await verifyPassword(password, user.password);
 
@@ -34,7 +34,7 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
     const decodedToken = jwtDecode(token);
     const expiresAt = decodedToken.exp;
 
-    req.session.user = userInfo;
+    //req.session.user = userInfo;
 
     return res
       .status(200)
