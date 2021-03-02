@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const helmet = require('helmet');
+const handleError = require('./src/middleware/handleError')
 const session = require('express-session');
 const policies = require('../_CONFIG/csp');
 const { SESSION_SECRET, SESSION_AGE, JWT_SECRET } = require('../_CONFIG/constants');
@@ -72,7 +73,17 @@ app.use((req, res, next) => {
  * ERROR HANDLING
  */
 
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
 
+// error handler
+app.use(function(err, req, res, next) {
+
+  handleError(err, req, res, next)
+
+});
 
 /**
  * EXPORT

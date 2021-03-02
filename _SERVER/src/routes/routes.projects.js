@@ -4,8 +4,6 @@ const projectsRouter = Router();
 // models
 const Project = require('../models/Project');
 
-// middleware 
-const { checkJwt } = require('../middleware/handleAuthentication');
 
 // actions
 const {
@@ -17,10 +15,15 @@ const {
   delete_all
 } = require('../actions/actions.projects');
 
+// middleware 
+const { requireAuth, attachUser } = require('../middleware/handleAuthentication');
+
+projectsRouter.use(requireAuth, attachUser);
+
 // router
 projectsRouter
   .route('/')
-  .get(checkJwt, read)
+  .get(read)
   .post(create)
   .delete(delete_all);
 

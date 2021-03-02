@@ -5,7 +5,7 @@ const useGet = (url) => {
   const [data, setData] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
-  const authContext = React.useContext(AuthContext)
+  const {authContext} = React.useContext(AuthContext)
 
   const token = localStorage.getItem('token');
 

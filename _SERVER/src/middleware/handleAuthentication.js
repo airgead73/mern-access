@@ -2,8 +2,9 @@ const jwt = require('express-jwt');
 const jwtDecode = require('jwt-decode');
 const { JWT_SECRET } = require('../../../_CONFIG/constants')
 
-exports.checkJwt = jwt({
+exports.requireAuth = jwt({
   secret: JWT_SECRET,
+  algorithms: ['HS256'],
   audience: 'api.starter',
   issuer: 'api.starter',
 });
