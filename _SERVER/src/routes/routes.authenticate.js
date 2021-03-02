@@ -9,6 +9,9 @@ const {
   authenticate
 } = require('../actions/actions.authenticate');
 
+// middleware
+const { requireAuth } = require('../middleware/handleAuthentication');
+
 // router
 authenticationRouter
   .route('/')

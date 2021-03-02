@@ -1,7 +1,7 @@
 const asyncHandler = require('../middleware/handleAsync');
 const User = require('../models/User');
 const jwtDecode = require('jwt-decode');
-const { hashPassword, createToken, verifyPassword } = require('../util/authentication');
+const { createToken, verifyPassword } = require('../util/authentication');
 
 /**
  * @route   POST /api/authenticate
@@ -22,7 +22,7 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
         success: false,
         message: 'Wrong email or password.'
       });
-  }
+  }  
 
   const passwordValid = await verifyPassword(password, user.password);
 
@@ -33,6 +33,8 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
     const token = createToken(userInfo);
     const decodedToken = jwtDecode(token);
     const expiresAt = decodedToken.exp;
+
+    //req.session.user = userInfo;
 
     return res
       .status(200)
@@ -51,5 +53,19 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
         message: 'Wrong email or password.'
       });
   }
+
+});
+
+/**
+ * @route   GET /api/authenticate/logout
+ * @desc    logout user 
+ * @access  private
+ */
+
+exports.logout = asyncHandler(async function(req, res, next) {
+
+  return res
+    .status(200)
+    .cookie('')
 
 });

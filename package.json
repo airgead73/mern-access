@@ -8,7 +8,8 @@
     "dev": "concurrently \"npm:server:dev\" \"npm:client:dev\"",
     "server:dev": "NODE_ENV=development nodemon -r dotenv/config index.js",
     "client:build": "NODE_ENV=production webpack --config ./_CONFIG/webpack.config.js",
-    "client:dev": "webpack serve --config ./_CONFIG/webpack.config.js"
+    "client:dev": "webpack serve --config ./_CONFIG/webpack.config.js",
+    "deploy": "git push heroku deploy:master"
   },
   "babel": {
     "presets": [
@@ -37,6 +38,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
+    "express-session": "^1.17.1",
     "helmet": "^4.4.1",
     "http-errors": "^1.7.2",
     "jsonwebtoken": "^8.5.1",

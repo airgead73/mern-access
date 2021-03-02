@@ -4,6 +4,7 @@ const projectsRouter = Router();
 // models
 const Project = require('../models/Project');
 
+
 // actions
 const {
   create,
@@ -13,6 +14,11 @@ const {
   delete_one,
   delete_all
 } = require('../actions/actions.projects');
+
+// middleware 
+const { requireAuth, attachUser } = require('../middleware/handleAuthentication');
+
+projectsRouter.use(requireAuth, attachUser);
 
 // router
 projectsRouter
