@@ -7,6 +7,7 @@ exports.requireAuth = jwt({
   algorithms: ['HS256'],
   audience: 'api.starter',
   issuer: 'api.starter',
+  getToken: req => req.cookies.token
 });
 
 exports.requireAdmin = (req, res, next) => {
@@ -23,13 +24,13 @@ exports.requireAdmin = (req, res, next) => {
 };
 
 exports.attachUser = (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.cookies.token;
   if (!token) {
     return res
       .status(401)
       .json({ message: 'Authentication invalid' });
   }
-  const decodedToken = jwtDecode(token.slice(7));
+  const decodedToken = jwtDecode(token);
 
   if (!decodedToken) {
     return res.status(401).json({
