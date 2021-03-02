@@ -4,6 +4,9 @@ const projectsRouter = Router();
 // models
 const Project = require('../models/Project');
 
+// middleware 
+const { checkJwt } = require('../middleware/handleAuthentication');
+
 // actions
 const {
   create,
@@ -17,7 +20,7 @@ const {
 // router
 projectsRouter
   .route('/')
-  .get(read)
+  .get(checkJwt, read)
   .post(create)
   .delete(delete_all);
 

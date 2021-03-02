@@ -4,7 +4,8 @@ const path = require('path');
 const helmet = require('helmet');
 const session = require('express-session');
 const policies = require('../_CONFIG/csp');
-const { SESSION_SECRET, SESSION_AGE } = require('../_CONFIG/constants');
+const { SESSION_SECRET, SESSION_AGE, JWT_SECRET } = require('../_CONFIG/constants');
+const jwt = require('express-jwt');
 
 /**
  * INTIALIZE APP
@@ -39,12 +40,13 @@ app.use(express.static(path.join(__dirname, './../_PUBLIC')));
 //   }
 // }));
 
-// app.use((req, res, next) => {
+app.use((req, res, next) => {
 
-//   console.log(req.session);
-//   next()
+  console.log(req.headers);
+  next()
 
-// });
+});
+
 
 /**
  * DEV MIDDLEWARE

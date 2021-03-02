@@ -2,10 +2,10 @@ const jwt = require('express-jwt');
 const jwtDecode = require('jwt-decode');
 const { JWT_SECRET } = require('../../../_CONFIG/constants')
 
-exports.requireAuth = jwt({
+exports.checkJwt = jwt({
   secret: JWT_SECRET,
-  audience: 'api.manager',
-  issuer: 'api.orbit',
+  audience: 'api.starter',
+  issuer: 'api.starter',
 });
 
 exports.requireAdmin = (req, res, next) => {

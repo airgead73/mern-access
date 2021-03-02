@@ -31,18 +31,18 @@ const AppRoutes = () => {
       <Route exact path='/'>
         <Home/>
       </Route>
+      <Route path='/login'>
+        <Login/>
+      </Route>      
       <PrivateRoute path='/dashboard'>
         <MainDashboard/>
       </PrivateRoute>
       <PrivateRoute path='/projects'>
         <Projects/>
-      </PrivateRoute>        
-      <Route path='/login'>
-        <Login/>
-      </Route>
-      <Route path='/signup'>
+      </PrivateRoute>  
+      <PrivateRoute path='/signup'>
         <Signup/>
-      </Route>
+      </PrivateRoute>  
       <Route path='*'>
         <NotFound/>
       </Route>                   
