@@ -6,6 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node index.js",
     "dev": "concurrently \"npm:server:dev\" \"npm:client:dev\"",
+    "clean": "rm -rf _PUBLIC/",
     "server:dev": "NODE_ENV=development nodemon -r dotenv/config index.js",
     "client:build": "NODE_ENV=production webpack --config ./_CONFIG/webpack.config.js",
     "client:dev": "webpack serve --config ./_CONFIG/webpack.config.js",
