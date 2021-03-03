@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import useGet from '../fetch/useGet';
 
 const AuthContext = React.createContext();
 const { Provider } = AuthContext;
@@ -53,6 +54,19 @@ const AuthProvider = ({children}) => {
     history.push('/login')
   }
 
+  const getNewToken = async () => {
+    try {
+
+      const { data } = useGet('/api/tokens/refresh');
+      setAuthState(
+        Object.assign({}, authState, { token: data.token })
+      )
+
+    } catch(err) {
+      return err;
+    }
+  }
+
   return (
     <Provider
       value={{
@@ -60,6 +74,7 @@ const AuthProvider = ({children}) => {
         setAuthState: authInfo => setAuthInfo(authInfo),
         isAuthenticated,
         isAdmin,
+        getNewToken,
         logout
       }}
     >
