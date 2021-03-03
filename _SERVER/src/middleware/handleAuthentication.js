@@ -7,7 +7,7 @@ exports.requireAuth = jwt({
   algorithms: ['HS256'],
   audience: 'api.starter',
   issuer: 'api.starter',
-  getToken: req => req.cookies.token
+  //getToken: req => req.cookies.token
 });
 
 exports.requireAdmin = (req, res, next) => {
