@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken');
+const randToken = require('rand-token');
+const Token = require('../models/Token');
 const bcrypt = require('bcryptjs');
 const { JWT_SECRET } = require('../../../_CONFIG')
 
@@ -33,8 +35,31 @@ const verifyPassword = (passwordAttempt, hashedPassword) => {
   return bcrypt.compare(passwordAttempt, hashedPassword)
 };
 
+const getRefreshToken = () => {
+  return randToken.uid(64);
+}
+
+const saveRefreshToken = async (refreshToken, userId) => {
+  try {
+
+    const storedRefreshToken = new Token({
+      refreshToken,
+      user: userId
+    });
+
+    return await storedRefreshToken.save()
+
+  } catch(err) {
+    return err;
+  }
+}
+
+
+
 module.exports = {
   hashPassword,
   verifyPassword,
-  createToken
+  createToken,
+  getRefreshToken,
+  saveRefreshToken
 }

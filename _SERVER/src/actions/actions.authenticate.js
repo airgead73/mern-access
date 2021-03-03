@@ -1,7 +1,7 @@
 const asyncHandler = require('../middleware/handleAsync');
 const User = require('../models/User');
 const jwtDecode = require('jwt-decode');
-const { createToken, verifyPassword } = require('../util/authentication');
+const { createToken, verifyPassword, getRefreshToken, saveRefreshToken } = require('../util/authentication');
 
 /**
  * @route   POST /api/authenticate
@@ -34,9 +34,14 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
     const decodedToken = jwtDecode(token);
     const expiresAt = decodedToken.exp;
 
-    //req.session.user = userInfo;
+    const refreshToken = getRefreshToken();
+
+    await saveRefreshToken(refreshToken, userInfo._id);
 
     return res
+      .cookie('refreshToken', refreshToken, {
+        httpOnly: true
+      })
       .status(200)
       .json({
         success: true,
