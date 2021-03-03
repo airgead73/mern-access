@@ -1,13 +1,9 @@
 import React from 'react';
-import {AuthContext} from '../contexts/authentication';
 
 const useGet = (url) => {
   const [data, setData] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
-  const {authContext} = React.useContext(AuthContext)
-
-  const token = localStorage.getItem('token');
 
   console.log('get projects')
 
@@ -17,8 +13,7 @@ const useGet = (url) => {
 
     setTimeout(() => {
       fetch(url, { 
-        signal: abortConstant.signal,
-        headers: { 'Authorization': `Bearer ${token}`}
+        signal: abortConstant.signal
       })
 
         .then(response => {

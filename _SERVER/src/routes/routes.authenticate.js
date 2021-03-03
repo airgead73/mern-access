@@ -6,7 +6,8 @@ const User = require('../models/User');
 
 // actions
 const {
-  authenticate
+  authenticate,
+  logout
 } = require('../actions/actions.authenticate');
 
 // middleware
@@ -16,6 +17,10 @@ const { requireAuth } = require('../middleware/handleAuthentication');
 authenticationRouter
   .route('/')
   .post(authenticate);
+
+authenticationRouter
+  .route('/logout')
+  .get(logout);
 
 module.exports = {
   authenticationRouter,

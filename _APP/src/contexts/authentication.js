@@ -1,24 +1,23 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import useGet from '../fetch/useGet';
 
 const AuthContext = React.createContext();
 const { Provider } = AuthContext;
 
 const AuthProvider = ({children}) => {
   const history = useHistory();
-  const token = localStorage.getItem('token');
   const userInfo = localStorage.getItem('userInfo');
   const expiresAt = localStorage.getItem('expiresAt');
 
   const [authState, setAuthState] = React.useState({
-    token,
+    token: null,
     expiresAt,
     userInfo: userInfo ? JSON.parse(userInfo) : {}
   });
 
   const setAuthInfo = ({ token, userInfo, expiresAt }) => {
-
-    localStorage.setItem('token', token);
+    
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
     localStorage.setItem('expiresAt', expiresAt);
 
@@ -31,7 +30,7 @@ const AuthProvider = ({children}) => {
   }
 
   const isAuthenticated = () => {
-    if(!authState.token || !authState.expiresAt) {
+    if(!authState.expiresAt) {
       return false;
     }
     return new Date().getTime() / 1000 < authState.expiresAt;
@@ -42,15 +41,33 @@ const AuthProvider = ({children}) => {
   }
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('expiresAt');
-    setAuthState({
-      token: null,
-      expiresAt: null,
-      userInfo: {}
-    });
-    history.push('/login')
+    fetch('/api/authenticate/logout')
+    .then((response) => {
+      if(!response.ok) {
+        throw Error('Could not fetch complete fetch.')
+      } else {
+        return response.json()
+      }
+    })
+    .then((data) => {
+      console.log(data.success);
+      if(data.success) {
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('expiresAt');
+        setAuthState({
+          token: null,
+          expiresAt: null,
+          userInfo: {}
+        });
+        history.push('/login')
+      }
+
+    })
+    .catch((err) => {
+      console.warn(err);
+    });    
+
+    
   }
 
   return (

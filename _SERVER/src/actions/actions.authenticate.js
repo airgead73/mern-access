@@ -37,6 +37,9 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
     //req.session.user = userInfo;
 
     return res
+      .cookie('token', token, {
+        httpOnly: true
+      })
       .status(200)
       .json({
         success: true,
@@ -66,6 +69,10 @@ exports.logout = asyncHandler(async function(req, res, next) {
 
   return res
     .status(200)
-    .cookie('')
+    .cookie('token', '')
+    .json({
+      success: true,
+      message: 'Successfully logged out'
+    })
 
 });

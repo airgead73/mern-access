@@ -4,11 +4,9 @@ import { AuthContext, AuthProvider } from './contexts/authentication';
 import Layout from './layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
-//import MainDashboard from './pages/MainDashboard';
 import NotFound from './pages/NotFound';
-//import Projects from './pages/Projects';
-//import Signup from './pages/Signup';
 
+// Lazy loading
 const MainDashboard = lazy(() => import('./pages/MainDashboard'));
 const Projects = lazy(() => import('./pages/Projects'));
 const Signup = lazy(() => import('./pages/Signup'));
@@ -32,26 +30,26 @@ const PrivateRoute = ({ children, ...rest }) => {
 const AppRoutes = () => {
   return (
     <Suspense fallback={<div>loading...</div>}>
-    <Switch>
-      <Route exact path='/'>
-        <Home/>
-      </Route>
-      <Route path='/login'>
-        <Login/>
-      </Route>      
-      <PrivateRoute path='/dashboard'>
-        <MainDashboard/>
-      </PrivateRoute>
-      <PrivateRoute path='/projects'>
-        <Projects/>
-      </PrivateRoute>  
-      <PrivateRoute path='/signup'>
-        <Signup/>
-      </PrivateRoute>  
-      <Route path='*'>
-        <NotFound/>
-      </Route>                   
-    </Switch>
+      <Switch>
+        <Route exact path='/'>
+          <Home/>
+        </Route>
+        <Route path='/login'>
+          <Login/>
+        </Route>      
+        <PrivateRoute path='/dashboard'>
+          <MainDashboard/>
+        </PrivateRoute>
+        <PrivateRoute path='/projects'>
+          <Projects/>
+        </PrivateRoute>  
+        <PrivateRoute path='/signup'>
+          <Signup/>
+        </PrivateRoute>  
+        <Route path='*'>
+          <NotFound/>
+        </Route>                   
+      </Switch>
     </Suspense>
   )
 }
