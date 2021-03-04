@@ -27,14 +27,14 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
   const passwordValid = await verifyPassword(password, user.password);
 
   if(passwordValid) {
-    const { password, bio, ...rest } = user;
+    const { password, ...rest } = user;
     const userInfo = Object.assign({}, { ...rest });
 
     const token = createToken(userInfo);
     const decodedToken = jwtDecode(token);
     const expiresAt = decodedToken.exp;
 
-    //req.session.user = userInfo;
+    req.session.user = userInfo;
 
     return res
       .status(200)
@@ -57,6 +57,39 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
 });
 
 /**
+ * @route   GET /api/authenticate/user-info
+ * @desc    get user info
+ * @access  private
+ */
+
+exports.user_info = asyncHandler(async function(req, res, next) {
+
+  const { user } = req.session;
+
+  if(!user) {
+    return res
+      .status(401)
+      .json({
+        success: false,
+        message: "Unauthorized"
+      });
+  }
+
+  setTimeout(() => {
+    return res
+    .status(200)
+    .json({
+      success: true,
+      user
+    });
+  }, 1000)
+
+
+
+
+});
+
+/**
  * @route   GET /api/authenticate/logout
  * @desc    logout user 
  * @access  private
@@ -64,11 +97,21 @@ exports.authenticate = asyncHandler(async function(req, res, next) {
 
 exports.logout = asyncHandler(async function(req, res, next) {
 
-  return res
-    .status(200)
-    .json({
-      success: true,
-      message: 'Successfully logged out'
-    })
+  req.session.destroy(err => {
+    if(err) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: 'There was a problem logging out'
+        });
+    }
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: 'Successfully logged out'
+      });
+  });
 
 });

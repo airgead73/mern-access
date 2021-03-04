@@ -8,7 +8,7 @@ const Header = (props) => {
   return ( 
     <header>
       <h1>project manager</h1>
-      <p>{authState.userInfo.firstName}</p>
+     
       {isAuthenticated() && (<button onClick={() => logout()}>logout</button>)}
       
     </header>

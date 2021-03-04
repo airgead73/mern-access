@@ -17,6 +17,29 @@ const AuthProvider = ({children}) => {
     userInfo: userInfo ? JSON.parse(userInfo) : {}
   });
 
+  // React.useEffect(() => {
+  //   const getUserInfo = async () => {
+  //     try {
+
+  //       fetch('/api/authenticate/user-info')
+  //         .then(response => {
+  //           if(!response.ok) {
+  //             throw Error('Could not fetch data')
+  //           }
+  //           return response.json();
+  //         })
+  //         .then((data) => {
+  //           console.log(data)
+  //         })
+
+  //     } catch(err) {
+  //       console.log(err)
+  //     }
+  //   }
+  //   getUserInfo()
+
+  // }, []);
+
   const setAuthInfo = ({ token, userInfo, expiresAt }) => {
     localStorage.setItem('token', token);
     localStorage.setItem(

@@ -11,23 +11,23 @@ const useGet = (url) => {
 
     setTimeout(() => {
       fetch(url, { 
+        method: 'DELETE',
         signal: abortConstant.signal
       })
-
-        .then(response => {
+      .then(response => {
           if(!response.ok) {
             throw Error('Could not fetch data for that resource.')
           }
           console.log(response)
           return response.json()
         })
-        .then((data) => {
+      .then((data) => {
           setData(data.results);
           setIsLoading(false);
           setError(null);
           console.log(data.results)
         })
-        .catch((err) => {
+      .catch((err) => {
           if(err.name === 'AbortError') {
             console.log('fetch aborted')
           } else {
@@ -35,7 +35,7 @@ const useGet = (url) => {
             setIsLoading(false);
           }
 
-        })
+      })
     }, 1000);
 
     return () => abortConstant.abort();

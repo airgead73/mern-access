@@ -67,6 +67,11 @@ app.use((req, res, next) => {
  * LOAD ROUTES
  */
 
+app.use((req, res, next) => {
+  console.log(req.session);
+  next();
+})
+
  const { apiRouter } = require('./src/routes/index');
  app.use('/api', apiRouter);
 
