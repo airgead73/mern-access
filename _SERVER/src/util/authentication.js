@@ -35,27 +35,6 @@ const verifyPassword = (passwordAttempt, hashedPassword) => {
   return bcrypt.compare(passwordAttempt, hashedPassword)
 };
 
-const getRefreshToken = () => {
-  return randToken.uid(64);
-}
-
-const saveRefreshToken = async (refreshToken, userId) => {
-  try {
-
-    const storedRefreshToken = new Token({
-      refreshToken,
-      user: userId
-    });
-
-    return await storedRefreshToken.save()
-
-  } catch(err) {
-    return err;
-  }
-}
-
-
-
 module.exports = {
   hashPassword,
   verifyPassword,

@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { AuthContext, AuthProvider } from './contexts/authentication';
 import Layout from './layout';
 import Home from './pages/Home';
@@ -59,12 +60,19 @@ const AppRoutes = () => {
 function App() {
 
   return (
-
-    <AuthProvider>
-      <Layout>
-        <AppRoutes/>
-      </Layout>
-    </AuthProvider>
+    <Auth0Provider
+      domain="dev-qj-2o3b9.us.auth0.com"
+      clientId="DOROFtSIdkCaCLfWhX5M4Inu9Uik390M"
+      redirectUri={`${window.location.origin}/dashboard`}
+    >
+      <Router>
+        <AuthProvider>
+          <Layout>
+            <AppRoutes/>
+          </Layout>
+        </AuthProvider>
+      </Router>
+    </Auth0Provider>
 
   )
 }

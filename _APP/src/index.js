@@ -6,10 +6,8 @@ import './index.scss';
 __webpack_nonce__ = 'htueffffhehendgvhfdhggfwasaweqfkjkjhvdhghsfdfkjhpofjfbndfhsflkdlknfkjbnlfvyucdrsdysf';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <App/>
-    </Router>    
+  <React.StrictMode>  
+      <App/>    
   </React.StrictMode>,
   document.getElementById('root')
 );
