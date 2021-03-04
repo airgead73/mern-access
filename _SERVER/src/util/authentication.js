@@ -59,7 +59,5 @@ const saveRefreshToken = async (refreshToken, userId) => {
 module.exports = {
   hashPassword,
   verifyPassword,
-  createToken,
-  getRefreshToken,
-  saveRefreshToken
+  createToken
 }
