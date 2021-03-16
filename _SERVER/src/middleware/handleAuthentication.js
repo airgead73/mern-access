@@ -1,12 +1,19 @@
 const jwt = require('express-jwt');
 const jwtDecode = require('jwt-decode');
+const jwks = require('jwks-rsa');
+const jwtAuthz = require('express-jwt-authz');
 const { JWT_SECRET } = require('../../../_CONFIG/constants')
 
 exports.requireAuth = jwt({
-  secret: JWT_SECRET,
-  algorithms: ['HS256'],
-  audience: 'api.starter',
-  issuer: 'api.starter',
+  secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: process.env.AUTH0_JWKS_URI
+}),
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: process.env.AUTH0_ISSUER,
+  algorithms: ['RS256']
 });
 
 exports.requireAdmin = (req, res, next) => {
