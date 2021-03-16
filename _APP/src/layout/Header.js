@@ -1,21 +1,17 @@
 import React from 'react';
-import { AuthContext } from '../contexts/authentication';
-import { useAuth0 } from '@auth0/auth0-react'
 
-const Header = (props) => {
-
-  const { loginWithRedirect, logout } = useAuth0();
+const Header = () => {
 
   return ( 
     <header>
-      <h1>project manager</h1>
-      
-      <button onClick={loginWithRedirect}>login</button>
-      <button onClick={() => logout({ returnTo: window.location.origin })}>logout</button>
-      
-      
+      <h1>project manager</h1>  
+      <h2>
+        <button onClick={}>login</button>{' '}
+        <button onClick={}>logout</button>
+      </h2> 
     </header>
    );
+
 }
  
 export default Header;
