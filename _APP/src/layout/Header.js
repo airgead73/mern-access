@@ -12,12 +12,13 @@ const Header = () => {
 
   return ( 
     <header>
-      <h1>project manager {' '} 
-        {user && <span>{user.name}</span>}        
-      </h1>  
+      <h1>project manager</h1>  
+      {isAuthenticated && <p>
+        <small>{user.name}</small>
+      </p>}
       <h2>
-        <button onClick={loginWithRedirect}>login</button>{' '}
-        <button onClick={() => logout({ returnTo: window.location.orgin})}>logout</button>
+        {!isAuthenticated &&<button onClick={loginWithRedirect}>login</button>}
+        {isAuthenticated && <button onClick={() => logout({ returnTo: window.location.orgin})}>logout</button>}     
       </h2> 
     </header>
    );
