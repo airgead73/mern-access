@@ -7,13 +7,15 @@ const Nav = () => {
     <nav>
       <ul>
         <li>
-          <Link to="/">home</Link>
-          <Link to="/dashboard">dashboard</Link>
+          <Link to="/">home</Link>          
         </li> 
+        <li>
+          <Link to="/dashboard">dashboard</Link>
+        </li>
       </ul>
     </nav>
    );
-   
+
 }
  
 export default Nav;

@@ -1,4 +1,5 @@
 import React, { lazy, Suspense } from 'react';
+import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Layout from './layout';
 import Home from './pages/Home';
@@ -7,7 +8,7 @@ import NotFound from './pages/NotFound';
 const MainDashboard = lazy(() => import('./pages/MainDashboard'));
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const isAuthenticated = true;
+  const { isAuthenticated } = useAuth0();
   return (
     <Route
       {...rest}
@@ -23,6 +24,10 @@ const PrivateRoute = ({ children, ...rest }) => {
 };
 
 const AppRoutes = () => {
+  const { isLoading } = useAuth0();
+  if(isLoading) {
+    return <div>Loading...</div>
+  }
   return (
     <Suspense fallback={<div>loading...</div>}>
     <Switch>
@@ -43,14 +48,18 @@ const AppRoutes = () => {
 function App() {
 
   return (
-
+    <Auth0Provider
+      domain="orbitsecurity.us.auth0.com"
+      clientId="48c3lSyoS8joZgVUloMALqQbBvy60Mta"
+      redirectUri={`${window.location.origin}/dashboard`}
+      audience="https://api.orbit/"
+    >
       <Router>
-        <AuthProvider>
           <Layout>
             <AppRoutes/>
           </Layout>
-        </AuthProvider>
       </Router> 
+    </Auth0Provider>
 
   );
 
