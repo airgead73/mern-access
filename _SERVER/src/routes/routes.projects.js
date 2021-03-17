@@ -15,9 +15,9 @@ const {
 } = require('../actions/actions.projects');
 
 // middleware 
-const { requireAuth } = require('../middleware/handleAuthentication');
+//const { requireAuth } = require('../middleware/handleAuthentication');
 
-projectsRouter.use(requireAuth);
+//projectsRouter.use(requireAuth);
 
 // router
 projectsRouter
