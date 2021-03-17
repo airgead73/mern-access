@@ -4,7 +4,6 @@ const projectsRouter = Router();
 // models
 const Project = require('../models/Project');
 
-
 // actions
 const {
   create,
@@ -16,9 +15,9 @@ const {
 } = require('../actions/actions.projects');
 
 // middleware 
-const { requireAuth, attachUser } = require('../middleware/handleAuthentication');
+const { requireAuth } = require('../middleware/handleAuthentication');
 
-projectsRouter.use(requireAuth, attachUser);
+projectsRouter.use(requireAuth);
 
 // router
 projectsRouter
