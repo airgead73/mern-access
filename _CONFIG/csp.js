@@ -10,12 +10,12 @@ const policies = {
     "style-src-elem": [
       "'self'", 
       "'nonce-htueffffhehendgvhfdhggfwasaweqfkjkjhvdhghsfdfkjhpofjfbndfhsflkdlknfkjbnlfvyucdrsdysf'", 
-      "https://fonts.googleapis.com", 
+      "'unsafe-inline'", 
       "https://fonts.gstatic.com"
     ],
     "style-src": [
       "'self'", 
-      "'nonce-htueffffhehendgvhfdhggfwasaweqfkjkjhvdhghsfdfkjhpofjfbndfhsflkdlknfkjbnlfvyucdrsdysf'"]
+      "'unsafe-inline'"]
   }
 }
 
