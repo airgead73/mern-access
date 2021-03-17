@@ -10,12 +10,7 @@ module.exports = {
       { test: /\.svg$/, use: 'svg-inline-loader'},
       { test: /\.(scss|css)$/, use: [
         {
-          loader: 'style-loader',
-          options: {
-            attributes: {
-              nonce: 'htueffffhehendgvhfdhggfwasaweqfkjkjhvdhghsfdfkjhpofjfbndfhsflkdlknfkjbnlfvyucdrsdysf'
-            }
-          }
+          loader: 'style-loader'
         }, 
           'css-loader', 'sass-loader']},
       { 
