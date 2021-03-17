@@ -1,12 +1,24 @@
 import React from 'react';
-import {AuthContext} from '../contexts/authentication';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useGet = (url) => {
   const [data, setData] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
+  const [accessToken, setAccessToken] = useState();
+  const { getAccessTokenSilently } = useAuth0(); 
 
-  const token = localStorage.getItem('token');
+  const getAccessToken = async () => {
+    try {
+      const token = await getAccessTokenSilently();
+      setAccessToken(token);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  getAccessToken();
+
 
   console.log('get projects')
 

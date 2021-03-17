@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack  = require('webpack');
-const { PORT, PORT_CLIENT } = require('./constants');
 
 module.exports = {
 
@@ -19,7 +18,20 @@ module.exports = {
           }
         }, 
           'css-loader', 'sass-loader']},
-      { test: /\.(js)$/, use: 'babel-loader'}
+      { 
+        test: /\.(js)$/,
+        exclude: /node_modules/, 
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            '@babel/preset-env',
+            '@babel/preset-react'            
+          ],
+          plugins: [
+            '@babel/transform-runtime'
+          ]
+        }
+      }
     ]
   },
   output: {
@@ -28,10 +40,10 @@ module.exports = {
     publicPath: '/'
   },
   devServer: {
-    port: 6001,
+    port: 4041,
     historyApiFallback: true,
     proxy: {
-      '/api': `http://localhost:6000`
+      '/api': `http://localhost:4040`
     }
   },
   plugins: [
