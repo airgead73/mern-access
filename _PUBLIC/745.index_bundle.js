@@ -1,1 +1,0 @@
-(self.webpackChunkmern_access=self.webpackChunkmern_access||[]).push([[745],{745:(e,c,s)=>{"use strict";s.r(c),s.d(c,{default:()=>r});var n=s(466);const r=function(){return n.createElement("h1",null,"Projects")}}}]);
