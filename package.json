@@ -10,7 +10,7 @@
     "server:dev": "NODE_ENV=development nodemon -r dotenv/config index.js",
     "client:build": "NODE_ENV=production webpack --config ./_CONFIG/webpack.config.js",
     "client:dev": "webpack serve --config ./_CONFIG/webpack.config.js",
-    "deploy": "git push heroku deploy:master"
+    "deploy": "git push heroku c2:master"
   },
   "babel": {
     "presets": [
