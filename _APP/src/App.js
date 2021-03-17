@@ -51,7 +51,7 @@ function App() {
     <Auth0Provider
       domain="orbitsecurity.us.auth0.com"
       clientId="AJZRRa0HQMlEUH2vHlemYa2zgaurjNOv"
-      redirectUri={`${window.location.origin}/dashboard`}
+      redirectUri={`${window.location.origin}`}
       audience="https://api.mern/"
     >
       <Router>
