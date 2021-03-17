@@ -3,18 +3,27 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const ProjectsList = () => {
   const { getAccessTokenSilently } = useAuth0();
+  const [accessToken, setAccessToken] = useState();
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
 
-    const abortConstant = new AbortController();
+    const abortConstant = new AbortController(); 
 
     const getData = async () => {
       
       try {
 
-        const response = await fetch('/api/projects', { signal: abortConstant.signal});
+        const token = await getAccessTokenSilently();
+        setAccessToken(token);
+
+        const response = await fetch('/api/projects', 
+          { 
+            signal: abortConstant.signal,
+            headers: { 'Authorization': `Bearer ${accessToken}`}
+          }
+        );
         const json = await response.json();
         console.log('json:', json)
         const { results } = json;
@@ -32,37 +41,12 @@ const ProjectsList = () => {
 
     }
 
+
     getData();
 
     return () => abortConstant.abort();
-    // fetch('/api/projects', {
-    //   signal: abortConstant.signal
-    // })
-    // .then(response => {
-    //   if(!response.ok) {
-    //     throw Error('Could not fetch data for that resource')
-    //   }
-    //   console.log(response);
-    //   return response.json();
-    // })
-    // .then((data) => {
-    //   setData(data.results);
-    //   console.log(data.results);
-    //   setIsLoading(false);
-    // })
-    // .catch((err) => {
-    //   if(err.name === 'AbortError') {
-    //     console.log('fetch aborted')
-    //   } else {
-    //     setIsLoading(false);
-    //   }
-    // })
 
-
-    //return () => abortConstant.abort();
-
-
-  },[])
+  },[getAccessTokenSilently])
 
   return (
     <React.Fragment>
