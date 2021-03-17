@@ -9,7 +9,6 @@ const policies = {
     ],
     "style-src-elem": [
       "'self'", 
-      "'nonce-htueffffhehendgvhfdhggfwasaweqfkjkjhvdhghsfdfkjhpofjfbndfhsflkdlknfkjbnlfvyucdrsdysf'", 
       "'unsafe-inline'", 
       "https://fonts.gstatic.com"
     ],
