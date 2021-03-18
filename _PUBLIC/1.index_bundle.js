@@ -1,0 +1,1 @@
+(self.webpackChunkmern_access=self.webpackChunkmern_access||[]).push([[1],[,(e,n,a)=>{"use strict";a.r(n),a.d(n,{default:()=>r});var c=a(294);const r=function(){return c.createElement(c.Fragment,null,c.createElement("h2",null,"Main Dashboard"))}}]]);
