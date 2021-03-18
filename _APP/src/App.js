@@ -54,7 +54,7 @@ function App() {
       domain="orbitsecurity.us.auth0.com"
       clientId="AJZRRa0HQMlEUH2vHlemYa2zgaurjNOv"
       redirectUri={`${window.location.origin}/dashboard`}
-      audience="https://api.mern/"
+      audience="https://dpm-mernaccess.herokuapp.com/"
     >
       <Router>
           <Layout>
