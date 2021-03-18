@@ -47,11 +47,13 @@ const AppRoutes = () => {
 
 function App() {
 
+  console.log(window.location.origin)
+
   return (
     <Auth0Provider
       domain="orbitsecurity.us.auth0.com"
       clientId="AJZRRa0HQMlEUH2vHlemYa2zgaurjNOv"
-      redirectUri={`${window.location.origin}`}
+      redirectUri={`${window.location.origin}/dashboard`}
       audience="https://api.mern/"
     >
       <Router>
